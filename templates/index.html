@@ -3,41 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedRisk Predictor</title>
+    <title>MedRisk Predictor - Advanced</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .risk-low { background: linear-gradient(135deg, #48bb78 0%, #38a169 100%); }
+        .risk-medium { background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%); }
+        .risk-high { background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%); }
     </style>
 </head>
 <body class="gradient-bg min-h-screen">
     <div class="container mx-auto px-4 py-8">
         <div class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-white mb-4">MedRisk Predictor</h1>
-            <p class="text-xl text-blue-100">AI-Powered Hospital Readmission Risk Assessment</p>
+            <h1 class="text-4xl font-bold text-white mb-4">MedRisk Predictor Pro</h1>
+            <p class="text-xl text-blue-100">Advanced AI-Powered Hospital Readmission Risk Assessment</p>
+            <p class="text-blue-200 mt-2">Using 14 Medical Parameters for Accurate Predictions</p>
         </div>
         
-        <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl p-6">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Patient Assessment</h2>
+        <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl p-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Comprehensive Patient Assessment</h2>
             
-            <form id="predictionForm" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Age</label>
-                    <input type="number" name="age" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+            <form id="predictionForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Personal Information -->
+                <div class="space-y-3">
+                    <h3 class="text-lg font-semibold text-gray-700 border-b pb-2">Personal Information</h3>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Age</label>
+                        <input type="number" name="age" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Years">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                        <select name="gender" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <option value="0">Female</option>
+                            <option value="1">Male</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Age Group</label>
+                        <select name="age_group" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <option value="0">Young (18-45)</option>
+                            <option value="1">Middle (45-65)</option>
+                            <option value="2">Senior (65+)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">BMI</label>
+                        <input type="number" step="0.1" name="bmi" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="kg/m²">
+                    </div>
                 </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">BMI</label>
-                    <input type="number" step="0.1" name="bmi" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+
+                <!-- Vital Signs -->
+                <div class="space-y-3">
+                    <h3 class="text-lg font-semibold text-gray-700 border-b pb-2">Vital Signs</h3>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Systolic BP</label>
+                            <input type="number" name="systolic_bp" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="mmHg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Diastolic BP</label>
+                            <input type="number" name="diastolic_bp" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="mmHg">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Cholesterol (mg/dL)</label>
+                        <input type="number" name="cholesterol" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" value="200">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Blood Sugar (mg/dL)</label>
+                        <input type="number" name="blood_sugar" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" value="110">
+                    </div>
                 </div>
-                
-                <button type="submit" class="w-full bg-blue-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
-                    Assess Readmission Risk
-                </button>
+
+                <!-- Medical Metrics -->
+                <div class="space-y-3">
+                    <h3 class="text-lg font-semibold text-gray-700 border-b pb-2">Medical Metrics</h3>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Hemoglobin (g/dL)</label>
+                        <input type="number" step="0.1" name="hemoglobin" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" value="13.5">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Respiratory Rate</label>
+                        <input type="number" name="respiratory_rate" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" value="18">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Oxygen Saturation (%)</label>
+                        <input type="number" step="0.1" name="oxygen_saturation" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" value="97">
+                    </div>
+                </div>
+
+                <!-- Medical History -->
+                <div class="space-y-3">
+                    <h3 class="text-lg font-semibold text-gray-700 border-b pb-2">Medical History</h3>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Previous Admissions</label>
+                        <input type="number" name="previous_admissions" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" value="1">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Length of Stay (days)</label>
+                        <input type="number" name="length_of_stay" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" value="5">
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="checkbox" name="has_diabetes" value="1" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-2 text-sm text-gray-700">Has Diabetes</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" name="has_hypertension" value="1" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-2 text-sm text-gray-700">Has Hypertension</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="md:col-span-2">
+                    <button type="submit" class="w-full bg-blue-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
+                        Assess Comprehensive Readmission Risk
+                    </button>
+                </div>
             </form>
             
             <div id="results" class="mt-6 hidden p-4 rounded-lg">
-                <h3 class="text-xl font-semibold mb-2">Risk Assessment</h3>
-                <p id="riskResult" class="text-lg"></p>
+                <h3 class="text-xl font-semibold mb-2">Advanced Risk Assessment</h3>
+                <p id="riskResult" class="text-lg mb-2"></p>
+                <p id="featuresUsed" class="text-sm text-gray-600"></p>
+                <p id="confidenceLevel" class="text-sm text-gray-600"></p>
             </div>
         </div>
     </div>
@@ -48,6 +151,10 @@
             const formData = new FormData(this);
             const data = Object.fromEntries(formData.entries());
             
+            // Set default values for checkboxes
+            data.has_diabetes = data.has_diabetes || '0';
+            data.has_hypertension = data.has_hypertension || '0';
+
             try {
                 const response = await fetch('/predict', {
                     method: 'POST',
@@ -58,8 +165,13 @@
                 const result = await response.json();
                 const resultsDiv = document.getElementById('results');
                 const riskResult = document.getElementById('riskResult');
+                const featuresUsed = document.getElementById('featuresUsed');
+                const confidenceLevel = document.getElementById('confidenceLevel');
                 
                 riskResult.textContent = `Risk Level: ${result.risk_level} (${result.risk_percentage}%)`;
+                featuresUsed.textContent = `Analysis based on ${result.features_used} medical parameters`;
+                confidenceLevel.textContent = `Model Confidence: ${result.confidence}%`;
+                
                 resultsDiv.className = `mt-6 p-4 rounded-lg bg-${result.color}-100 border border-${result.color}-400`;
                 resultsDiv.classList.remove('hidden');
                 
