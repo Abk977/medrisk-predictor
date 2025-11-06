@@ -1,0 +1,23 @@
+{
+    "model_name": "Random Forest",
+    "accuracy": 0.85,
+    "auc_score": 0.89,
+    "features": [
+        "age",
+        "bmi",
+        "cholesterol_level",
+        "blood_sugar",
+        "hemoglobin",
+        "respiratory_rate",
+        "oxygen_saturation",
+        "previous_admissions",
+        "has_diabetes",
+        "has_hypertension",
+        "length_of_stay",
+        "gender_encoded",
+        "blood_pressure_mean",
+        "age_group_encoded"
+    ],
+    "readmission_rate": 0.242,
+    "timestamp": "2024-01-01 00:00:00"
+}
