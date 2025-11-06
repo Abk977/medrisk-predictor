@@ -1,4 +1,3 @@
-
 import pickle
 import numpy as np
 from flask import Flask, request, render_template, jsonify
@@ -6,15 +5,12 @@ import os
 
 app = Flask(__name__)
 
-# For demo purposes - in real scenario we'd load trained models
 class DemoModel:
     def predict_proba(self, X):
-        # Simulate prediction probabilities
         return np.array([[0.7, 0.3]] if np.random.random() > 0.5 else [[0.2, 0.8]])
     def predict(self, X):
         return [1] if np.random.random() > 0.5 else [0]
 
-# Use demo model for now
 model = DemoModel()
 
 @app.route('/')
@@ -25,11 +21,12 @@ def home():
 def predict():
     try:
         data = request.get_json()
+        age = float(data.get('age', 65))
+        bmi = float(data.get('bmi', 28))
         
-        # Simulate prediction
-        input_features = [float(data.get('age', 65)), float(data.get('bmi', 28))]
-        prediction_proba = model.predict_proba([input_features])[0]
-        prediction = model.predict([input_features])[0]
+        input_features = [[age, bmi]]
+        prediction_proba = model.predict_proba(input_features)[0]
+        prediction = model.predict(input_features)[0]
         
         risk_percentage = prediction_proba[1] * 100
         
@@ -55,4 +52,4 @@ def predict():
         return jsonify({'error': str(e)})
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True)
